@@ -205,6 +205,8 @@ class Granite::Query::Builder(Model)
 
   def first : Model
     assembler.first(1).first
+  rescue
+    raise "The query returned no result"
   end
 
   def first? : Model?

@@ -258,4 +258,8 @@ class Granite::Query::Builder(Model)
       yield record
     end
   end
+
+  def fetch : Executor::List(Model)
+    assembler.select.run
+  end
 end

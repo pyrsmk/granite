@@ -39,7 +39,6 @@ module Granite::Validators
       disable_granite_docs? def self.validate(field : (Symbol | String), message : String, block : {{ @type.id }} -> Bool)
         @@validators << {field: field.to_s, message: message, block: block}
       end
-      {%debug%}
     end
   end
 

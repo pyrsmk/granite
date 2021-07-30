@@ -203,14 +203,19 @@ class Granite::Query::Builder(Model)
     assembler.select.raw_sql
   end
 
-  # TODO: replace `querying.first` with this
-  # def first : Model?
-  #   first(1).first?
-  # end
+  def first : Model
+    assembler.first(1).first
+  rescue
+    raise "The query returned no result"
+  end
 
-  # def first(n : Int32) : Executor::List(Model)
-  #   assembler.first(n)
-  # end
+  def first? : Model?
+    assembler.first(1).first?
+  end
+
+  def first(n : Int32) : Executor::List(Model)
+    assembler.first(n)
+  end
 
   def any? : Bool
     !first.nil?
@@ -254,5 +259,9 @@ class Granite::Query::Builder(Model)
     assembler.select.run.map do |record|
       yield record
     end
+  end
+
+  def fetch : Executor::List(Model)
+    assembler.select.run
   end
 end

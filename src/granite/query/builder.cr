@@ -261,7 +261,7 @@ class Granite::Query::Builder(Model)
     end
   end
 
-  def fetch : Executor::List(Model)
+  def fetch : Array(Model)
     assembler.select.run
   end
 end
